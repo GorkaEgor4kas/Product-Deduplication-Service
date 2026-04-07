@@ -47,6 +47,7 @@ cd product-deduplication
 # Start the service
 docker-compose up --build
 ```
+
 The service will be available at: http://localhost:8000
 
 ## 📡 API endpoints
@@ -54,7 +55,7 @@ The service will be available at: http://localhost:8000
 ### POST /check — products check
 
 Checks if the item is a duplicate.
-```
+
 **Request:**
 ```json
 {
@@ -111,13 +112,12 @@ Called by the main server after saving a new unique item.
   "status": "alive"
 }
 ```
-```markdown
-## 🔧 Configuration
+
+##  Configuration
 
 ### Deduplication rules 
 
 The rules are stored in `rules/default_rules.yaml`:
-```
 
 ```yaml
 brands:
@@ -134,20 +134,17 @@ modifiers:
 
 You can edit this file to suit your needs. This custom rules will apply to the second (manual) check layer
 
-```markdown
 ### Variables
 
+The embedding model is defined here: `app/services/embedding_service.py`
 
-The embedding model is defined here: "app/services/embedding_service.py"
+All comparison settings are defined here: `app/services/deduplication_service.py` inside `__init__`
 
-All comparsion settings are defined here: "app/services/deduplication_service.py" inside __init__ 
+Vector database settings are defined here: `app/services/vector_store.py`. You can change the folder where it will be created.
 
-Vector database settings are defined here: "app/services/vector_store.py". You can change the folder where it will be created at 21's row
+##  Project's structure
+
 ```
-
-```markdown
-## 📁 Project's structure
-
 dedup-service/
 ├── app/
 │   ├── api/
@@ -164,6 +161,7 @@ dedup-service/
 ├── docker-compose.yml
 ├── requirements.txt
 └── README.md
+```
 
 ##  Request samples 
 
@@ -201,14 +199,14 @@ print(response.json())
 | Issue | Solution |
 |--------|---------|
 | `ModuleNotFoundError: No module named 'app'` | Run from the root directory: `python -m app.main` |
-| `Port 8000 already in use` | Kill the process using the port or use a different port in  docker-compose.yml |
+| `Port 8000 already in use` | Kill the process using the port or use a different port in docker-compose.yml |
 | `ChromaDB migration error` | Delete the folder `./chroma_data` and reboot |
 
 ## 📄 License
 
 MIT License
 
-##  Author
+## 👨‍💻 Author
 
 Egor Kostyrin
 
@@ -216,6 +214,6 @@ Egor Kostyrin
 - Telegram: [@GorkaEgor4ka]
 
 ---
-```
+
 If this project helped you, give it a star ⭐
 ```
