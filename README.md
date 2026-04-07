@@ -3,7 +3,7 @@
 
 A service for deduplicating products using embeddings and two-layer verification.
 
-## 📋 Description
+##  Description
 
 The service determines whether a new product is a duplicate of an existing one in your database.  
 It uses two-layer verification:
@@ -11,7 +11,7 @@ It uses two-layer verification:
 1. **Vector Search (ChromaDB)** — quick search for similar products by meaning
 2. **Rules (Rule Engine)** — precise check by brands, models and modifiers, and you can choose your custom rules!
 
-## 🚀 Capabilities
+##  Capabilities
 
 - ✅ duplicates check via API
 - ✅ Supports Russian and English languages
@@ -29,7 +29,7 @@ It uses two-layer verification:
 | **Docker / Docker Compose** | Containerization |
 | **PyYAML** | Rules configuration |
 
-## 📦 Getting Started
+##  Getting Started
 
 ### Prerequisites
 
@@ -136,9 +136,10 @@ modifiers:
 
 You can edit this file to suit your needs. This custom rules will apply to the second (manual) check layer
 
+```markdown
 ### Variables
 
-```
+
 The embedding model is defined here: "app/services/embedding_service.py"
 
 All comparsion settings are defined here: "app/services/deduplication_service.py" inside __init__ 
@@ -146,9 +147,9 @@ All comparsion settings are defined here: "app/services/deduplication_service.py
 Vector database settings are defined here: "app/services/vector_store.py". You can change the folder where it will be created at 21's row
 ```
 
+```markdown
 ## 📁 Project's structure
 
-```
 dedup-service/
 ├── app/
 │   ├── api/
@@ -165,7 +166,6 @@ dedup-service/
 ├── docker-compose.yml
 ├── requirements.txt
 └── README.md
-```
 
 ##  Request samples 
 
@@ -218,6 +218,6 @@ Egor Kostyrin
 - Telegram: [@GorkaEgor4ka]
 
 ---
-
+```
 If this project helped you, give it a star ⭐
 ```
