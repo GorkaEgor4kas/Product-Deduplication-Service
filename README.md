@@ -36,10 +36,9 @@ It uses two-layer verification:
 - Docker Desktop (20.10+)
 - 4 GB RAM
 - Available ports: 8000
-```
-```markdown
+
 ### Quick start
-```
+
 ```bash
 # Clone the repository
 git clone https://github.com/your-username/product-deduplication.git
@@ -48,7 +47,6 @@ cd product-deduplication
 # Start the service
 docker-compose up --build
 ```
-```mardown
 The service will be available at: http://localhost:8000
 
 ## 📡 API endpoints
