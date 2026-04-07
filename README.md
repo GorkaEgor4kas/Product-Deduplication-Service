@@ -36,9 +36,10 @@ It uses two-layer verification:
 - Docker Desktop (20.10+)
 - 4 GB RAM
 - Available ports: 8000
-
+```
+```markdown
 ### Quick start
-
+```
 ```bash
 # Clone the repository
 git clone https://github.com/your-username/product-deduplication.git
@@ -47,7 +48,7 @@ cd product-deduplication
 # Start the service
 docker-compose up --build
 ```
-
+```mardown
 The service will be available at: http://localhost:8000
 
 ## 📡 API endpoints
@@ -55,7 +56,7 @@ The service will be available at: http://localhost:8000
 ### POST /check — products check
 
 Checks if the item is a duplicate.
-
+```
 **Request:**
 ```json
 {
@@ -112,12 +113,13 @@ Called by the main server after saving a new unique item.
   "status": "alive"
 }
 ```
-
+```markdown
 ## 🔧 Configuration
 
 ### Deduplication rules 
 
 The rules are stored in `rules/default_rules.yaml`:
+```
 
 ```yaml
 brands:
