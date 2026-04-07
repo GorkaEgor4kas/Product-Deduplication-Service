@@ -63,7 +63,7 @@ Checks if the item is a duplicate.
 }
 ```
 
-**Responce (duplicate was found):**
+**Response (duplicate was found):**
 ```json
 {
   "is_duplicate": true,
@@ -74,7 +74,7 @@ Checks if the item is a duplicate.
 }
 ```
 
-**Responce (unique product):**
+**Response (unique product):**
 ```json
 {
   "is_duplicate": false,
@@ -98,7 +98,7 @@ Called by the main server after saving a new unique item.
 }
 ```
 
-**Responce:**
+**Response:**
 ```json
 {
   "status": "ok"
@@ -189,11 +189,11 @@ curl http://localhost:8000/health
 ```python
 import requests
 
-responce = requests.post(
+response = requests.post(
     "http://localhost:8000/check",
     json={"product_name": "rtx 5070 ti"}
 )
-print(responce.json())
+print(response.json())
 ```
 
 ## 🐛 Common Issues
@@ -219,3 +219,7 @@ Egor Kostyrin
 
 If this project helped you, give it a star ⭐
 ```
+
+
+
+
