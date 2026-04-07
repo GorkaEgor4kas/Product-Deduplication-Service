@@ -167,7 +167,7 @@ dedup-service/
 └── README.md
 ```
 
-## 🧪 Request samples 
+##  Request samples 
 
 ### cURL
 
@@ -198,7 +198,7 @@ response = requests.post(
 print(response.json())
 ```
 
-## 🐛 Common Issues
+##  Common Issues
 
 | Issue | Solution |
 |--------|---------|
@@ -210,7 +210,7 @@ print(response.json())
 
 MIT License
 
-## 👨‍💻 Author
+##  Author
 
 Egor Kostyrin
 
