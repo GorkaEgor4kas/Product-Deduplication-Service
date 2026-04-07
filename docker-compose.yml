@@ -1,0 +1,23 @@
+version: '3.8'
+
+srvices:
+  dedup-api:
+    build: .
+    container_name: dedup-service
+    ports:
+      - "8000:8000"
+    volumes:
+      #mounting ChromaDB folder, so that it is preserved between restarts
+      - ./chroma_data:/app/chroma_data
+      #mounting rules folder
+      - ./rulse:/app/rules
+    environment:
+      - PYTHONUNBUFFERED=1
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/api/v1/health"]
+      intervals: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    

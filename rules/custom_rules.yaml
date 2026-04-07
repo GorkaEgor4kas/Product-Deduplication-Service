@@ -1,0 +1,62 @@
+# This is a custom rules to compare products. You can write there whatever you want. This is just a sample of how it should look
+brand_normalization:
+  # Car brands
+  toyota: [toyota, camry, corolla, land cruiser]
+  honda: [honda, civic, accord, cr-v]
+  bmw: [bmw, x5, x3, m3, m5]
+  
+  # Electronics
+  sony: [ps, playstation, ps5, ps4]
+  nvidia: [rtx, gtx, nvidia]
+  apple: [iphone, ipad, macbook, apple]
+  samsung: [samsung, galaxy]
+  microsoft: [xbox]
+
+modifiers:
+  # Electronics modifiers
+  - ti
+  - pro
+  - max
+  - ultra
+  - plus
+  - lite
+  - se
+  - air
+  - mini
+  
+  # Car modifiers
+  - hybrid
+  - electric
+  - sport
+  - luxury
+  - touring
+
+category_keywords:
+  # GPU
+  gpu:
+    - rtx
+    - gtx
+    - graphics
+    - видеокарта
+    
+  # Smartphones
+  smartphone:
+    - iphone
+    - galaxy
+    - smartphone
+    - смартфон
+    
+  # Cars
+  automotive:
+    - toyota
+    - honda
+    - bmw
+    - car
+    - авто
+    
+  # Laptops
+  laptop:
+    - macbook
+    - thinkpad
+    - laptop
+    - ноутбук

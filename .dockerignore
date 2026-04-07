@@ -1,0 +1,15 @@
+__pycache__/
+venv/
+.env
+
+
+.vscode/
+.idea/
+
+.gitignore
+.git/
+
+README.md
+
+chroma_data/
+

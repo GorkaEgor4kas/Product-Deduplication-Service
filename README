@@ -1,0 +1,221 @@
+```markdown
+# Product Deduplication Service
+
+A service for deduplicating products using embeddings and two-layer verification.
+
+## 📋 Description
+
+The service determines whether a new product is a duplicate of an existing one in your database.  
+It uses two-layer verification:
+
+1. **Vector Search (ChromaDB)** — quick search for similar products by meaning
+2. **Rules (Rule Engine)** — precise check by brands, models and modifiers, and you can choose your custom rules!
+
+## 🚀 Capabilities
+
+- ✅ duplicates check via API
+- ✅ Supports Russian and English languages
+- ✅ custom rules via YAML file
+- ✅ Stateless architecture (horizontal scaling)
+- ✅ Docker Compose for fast start
+
+## 🛠 Tech Stack
+
+| Technology | Purpose |
+|------------|------------|
+| **FastAPI** | API framework |
+| **ChromaDB** | vector database |
+| **Sentence Transformers** | embeddings (BAAI/bge-m3) |
+| **Docker / Docker Compose** | Containerization |
+| **PyYAML** | Rules configuration |
+
+## 📦 Getting Started
+
+### Prerequisites
+
+- Docker Desktop (20.10+)
+- 4 GB RAM
+- Available ports: 8000
+
+### Quick start
+
+```bash
+# Clone the repository
+git clone https://github.com/your-username/product-deduplication.git
+cd product-deduplication
+
+# Start the service
+docker-compose up --build
+```
+
+The service will be available at: http://localhost:8000
+
+## 📡 API endpoints
+
+### POST /check — products check
+
+Checks if the item is a duplicate.
+
+**Request:**
+```json
+{
+  "product_name": "RTX 5070 Ti"
+}
+```
+
+**Responce (duplicate was found):**
+```json
+{
+  "is_duplicate": true,
+  "duplicate_of_id": "prod_12345",
+  "similarity_score": 0.94,
+  "matched_name": "NVIDIA RTX 5070 Ti",
+  "candidates_count": 3
+}
+```
+
+**Responce (unique product):**
+```json
+{
+  "is_duplicate": false,
+  "duplicate_of_id": null,
+  "similarity_score": null,
+  "matched_name": null,
+  "candidates_count": 0
+}
+```
+
+### POST /webhook/confirm — Confirmation of adding
+
+Called by the main server after saving a new unique item.
+
+**Request:**
+```json
+{
+  "product_id": "prod_12345",
+  "product_name": "NVIDIA RTX 5070 Ti",
+  "metadata": "None"
+}
+```
+
+**Responce:**
+```json
+{
+  "status": "ok"
+}
+```
+
+### GET /health — Health check
+
+```json
+{
+  "status": "alive"
+}
+```
+
+## 🔧 Configuration
+
+### Deduplication rules 
+
+The rules are stored in `rules/default_rules.yaml`:
+
+```yaml
+brands:
+  nvidia: ["nvidia", "geforce", "rtx"]
+  amd: ["amd", "radeon", "rx"]
+  apple: ["apple", "iphone", "macbook"]
+
+modifiers:
+  - ti
+  - pro
+  - max
+  - ultra
+```
+
+You can edit this file to suit your needs. This custom rules will apply to the second (manual) check layer
+
+### Variables
+
+```
+The embedding model is defined here: "app/services/embedding_service.py"
+
+All comparsion settings are defined here: "app/services/deduplication_service.py" inside __init__ 
+
+Vector database settings are defined here: "app/services/vector_store.py". You can change the folder where it will be created at 21's row
+```
+
+## 📁 Project's structure
+
+```
+dedup-service/
+├── app/
+│   ├── api/
+│   │   └── routes.py           # API endpoints
+│   ├── services/
+│   │   ├── embedding_service.py   # Embeddings
+│   │   ├── vector_store.py        # ChromaDB wrapper
+│   │   ├── rule_engine.py         # Rules comparator
+│   │   └── deduplication_service.py # Core logic
+│   └── main.py                 # Entry point
+├── rules/
+│   └── default_rules.yaml      # Default rules
+├── Dockerfile
+├── docker-compose.yml
+├── requirements.txt
+└── README.md
+```
+
+## 🧪 Request samples 
+
+### cURL
+
+```bash
+# product check
+curl -X POST http://localhost:8000/check \
+  -H "Content-Type: application/json" \
+  -d '{"product_name": "rtx 5070 ti"}'
+
+# Confirmation of addition
+curl -X POST http://localhost:8000/webhook/confirm \
+  -H "Content-Type: application/json" \
+  -d '{"product_id": "123", "product_name": "NVIDIA RTX 5070 Ti"}'
+
+# Health check
+curl http://localhost:8000/health
+```
+
+### Python
+
+```python
+import requests
+
+responce = requests.post(
+    "http://localhost:8000/check",
+    json={"product_name": "rtx 5070 ti"}
+)
+print(responce.json())
+```
+
+## 🐛 Common Issues
+
+| Issue | Solution |
+|--------|---------|
+| `ModuleNotFoundError: No module named 'app'` | Run from the root directory: `python -m app.main` |
+| `Port 8000 already in use` | Kill the process using the port or use a different port in  docker-compose.yml |
+| `ChromaDB migration error` | Delete the folder `./chroma_data` and reboot |
+
+## 📄 License
+
+MIT License
+
+## 👨‍💻 Author
+
+Egor Kostyrin
+
+- GitHub: [@GorkaEgor4kas](https://github.com/GorkaEgor4kas)
+- Telegram: [@GorkaEgor4ka]
+
+---
+
+If this project helped you, give it a star ⭐
+```
